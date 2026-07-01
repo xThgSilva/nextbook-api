@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,7 +17,11 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@OneToOne
+	@JoinColumn(name = "product_id")
 	private Product product;
+	
 	private String author;
 	private LocalDate publicationDate;
 	private String coverUrl;
@@ -25,18 +31,6 @@ public class Book {
 	
 	public Book() {	}
 
-	public Book(Long id, Product product, String author, LocalDate publicationDate, String coverUrl, String description,
-			Category category, Availability availability) {
-		this.id = id;
-		this.product = product;
-		this.author = author;
-		this.publicationDate = publicationDate;
-		this.coverUrl = coverUrl;
-		this.description = description;
-		this.category = category;
-		this.availability = availability;
-	}
-	
 	public Long getId() {
 		return id;
 	}
