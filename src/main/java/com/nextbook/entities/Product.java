@@ -2,6 +2,7 @@ package com.nextbook.entities;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,8 +16,14 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(length = 100, nullable = false)
 	private String name;
+	
+	@Column(precision = 5, scale = 2, nullable = false)
 	private BigDecimal price;
+	
+	@Column(nullable = false)
 	private int quantity;
 	
 	public Product() { }

@@ -1,5 +1,6 @@
 package com.nextbook.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,10 +14,20 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(length = 100, nullable = false)
 	private String name;
+	
+	@Column(length = 50, nullable = false, unique = true)
 	private String email;
+	
+	@Column(length = 255, nullable = false)
 	private String password;
+	
+	@Column(length = 11, nullable = false)
 	private String telephone;
+	
+	@Column(nullable = false)
 	private int age;
 	
 	public User() { }
