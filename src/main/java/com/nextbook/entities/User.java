@@ -25,7 +25,7 @@ public class User {
 	private String password;
 	
 	@Column(length = 11, nullable = false)
-	private String telephone;
+	private String phone;
 	
 	@Column(nullable = false)
 	private int age;
@@ -64,12 +64,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getTelephone() {
-		return telephone;
+	public String getphone() {
+		return phone;
 	}
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
+	public void setphone(String phone) {
+		this.phone = phone;
 	}
 
 	public int getAge() {

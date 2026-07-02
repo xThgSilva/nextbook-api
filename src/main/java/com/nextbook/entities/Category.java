@@ -1,5 +1,5 @@
 package com.nextbook.entities;
 
 public enum Category {
-	FICTION, ROMANCE, THRILLER, BIOGRAPHY	
+	FICTION, ROMANCE, HORROR, BIOGRAPHY	
 }
