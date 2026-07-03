@@ -1,5 +1,7 @@
 package com.nextbook.entities;
 
+import com.nextbook.requests.UserRequestDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +34,14 @@ public class User {
 	
 	public User() { }
 	
+	public User(UserRequestDTO dto) {
+		this.name = dto.getName();
+		this.email = dto.getEmail();
+		this.password = dto.getEmail();
+		this.phone = dto.getPhone();
+		this.age = dto.getAge();
+	}
+
 	public Long getId() {
 		return id;
 	}
