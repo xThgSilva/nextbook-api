@@ -2,6 +2,8 @@ package com.nextbook.entities;
 
 import java.time.LocalDate;
 
+import com.nextbook.requests.BookRequestDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -44,6 +46,15 @@ public class Book {
 	private Availability availability;
 	
 	public Book() {	}
+	
+	public Book(BookRequestDTO dto) {
+		this.author = dto.getAuthor();
+		this.publicationDate = dto.getPublicationDate();
+		this.coverUrl = dto.getCoverUrl();
+		this.description = dto.getDescription();
+		this.category = dto.getCategory();
+		this.availability = dto.getAvailability();
+	}
 
 	public Long getId() {
 		return id;
