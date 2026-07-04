@@ -2,6 +2,8 @@ package com.nextbook.entities;
 
 import java.math.BigDecimal;
 
+import com.nextbook.requests.BookRequestDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,36 +29,26 @@ public class Product {
 	private int quantity;
 	
 	public Product() { }
+	
+	public Product(BookRequestDTO dto) {
+		this.name = dto.getName();
+		this.price = dto.getPrice();
+		this.quantity = dto.getQuantity();
+	}
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
 	public int getQuantity() {
 		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 }

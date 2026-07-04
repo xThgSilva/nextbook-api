@@ -1,0 +1,36 @@
+package com.nextbook.services;
+
+import org.springframework.stereotype.Service;
+
+import com.nextbook.entities.Book;
+import com.nextbook.entities.Product;
+import com.nextbook.repositories.BookRepository;
+import com.nextbook.repositories.ProductRepository;
+import com.nextbook.requests.BookRequestDTO;
+import com.nextbook.responses.BookResponseDTO;
+
+import jakarta.transaction.Transactional;
+
+@Service
+public class BookService {
+
+	private final BookRepository bookRepository;
+	private final ProductRepository productRepository;
+
+	public BookService(BookRepository bookRepository, ProductRepository productRepository) {
+		this.bookRepository = bookRepository;
+		this.productRepository = productRepository;
+	}
+
+	@Transactional
+	public BookResponseDTO registerBook(BookRequestDTO dto) {
+		Product product = new Product(dto);
+		productRepository.save(product);
+		
+		Book book = new Book(dto);
+		book.setProduct(product);
+		bookRepository.save(book);
+		
+		return new BookResponseDTO(book);
+	}
+}

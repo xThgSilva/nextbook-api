@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 
 import com.nextbook.entities.Book;
 
-public class BookResponse {
+public class BookResponseDTO {
 	private Long id;
 	private String name;
 	private String author;
 	private BigDecimal price;
 	
-	public BookResponse(Book book) {
+	public BookResponseDTO(Book book) {
 		this.id = book.getId();
 		this.name = book.getProduct().getName();
 		this.author = book.getAuthor();
