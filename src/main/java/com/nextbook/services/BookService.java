@@ -7,6 +7,7 @@ import com.nextbook.entities.Product;
 import com.nextbook.repositories.BookRepository;
 import com.nextbook.repositories.ProductRepository;
 import com.nextbook.requests.BookRequestDTO;
+import com.nextbook.responses.BookFindDetailsResponseDTO;
 import com.nextbook.responses.BookResponseDTO;
 
 import jakarta.transaction.Transactional;
@@ -32,5 +33,12 @@ public class BookService {
 		bookRepository.save(book);
 		
 		return new BookResponseDTO(book);
+	}
+	
+	public BookFindDetailsResponseDTO findBookById(Long id) {
+		Book book = bookRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Book with Id " + id + " not found."));
+		
+		return new BookFindDetailsResponseDTO(book);
 	}
 }
