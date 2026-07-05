@@ -1,10 +1,8 @@
 package com.nextbook.entities;
 
 import java.math.BigDecimal;
-
 import com.nextbook.requests.BookRequestDTO;
 import com.nextbook.requests.ProductRequestDTO;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

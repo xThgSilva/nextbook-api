@@ -1,9 +1,7 @@
 package com.nextbook.services;
 
 import java.math.BigDecimal;
-
 import org.springframework.stereotype.Service;
-
 import com.nextbook.entities.Product;
 import com.nextbook.repositories.ProductRepository;
 import com.nextbook.requests.ProductRequestDTO;
@@ -28,5 +26,12 @@ public class ProductService {
 		else {
 			throw new RuntimeException("Invalid data to create product.");
 		}
+	}
+	
+	public ProductResponseDTO findProductById(Long id) {
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Product with Id: " + id + " not found."));
+	
+		return new ProductResponseDTO(product);
 	}
 }
