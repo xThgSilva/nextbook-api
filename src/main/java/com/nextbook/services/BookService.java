@@ -51,7 +51,7 @@ public class BookService {
 		return books.map(BookResponseDTO::new);
 	}
 	
-	public void deleteBook(Long id) {
+	public void deleteBookById(Long id) {
 	    Book book = bookRepository.findById(id)
 	        .orElseThrow(() -> new RuntimeException("Book with Id: " + id + " not found."));
 	        

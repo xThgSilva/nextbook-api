@@ -1,5 +1,6 @@
 package com.nextbook.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ public class UserController {
 	
 	@PostMapping(value = "/register")
 	public ResponseEntity<UserResponseDTO> registerUser(@RequestBody UserRequestDTO dto) {
-		return ResponseEntity.ok(userService.register(dto));
+		UserResponseDTO userResponse = userService.register(dto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
 	}
 }

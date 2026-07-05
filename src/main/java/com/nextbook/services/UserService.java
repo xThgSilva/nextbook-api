@@ -22,18 +22,15 @@ public class UserService {
 	public UserResponseDTO register(UserRequestDTO dto) {
 		Optional<User> emailExists = userRepository.findByEmail(dto.getEmail());
 		
-		if (emailExists.isPresent()) {
+		if (emailExists.isPresent())
 			throw new RuntimeException("E-mail already registered.");
-		}
 		
-		if (!dto.getPassword().equals(dto.getConfirmPassword())) {
+		if (!dto.getPassword().equals(dto.getConfirmPassword()))
 			throw new RuntimeException("The password confirmation must match the password.");
-		}
-		else {
+
 			User user = new User(dto);
 			userRepository.save(user);
 			
 			return new UserResponseDTO(user);
-		}
 	}
 }
