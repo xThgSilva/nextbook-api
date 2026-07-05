@@ -3,6 +3,7 @@ package com.nextbook.entities;
 import java.math.BigDecimal;
 
 import com.nextbook.requests.BookRequestDTO;
+import com.nextbook.requests.ProductRequestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +31,15 @@ public class Product {
 	
 	public Product() { }
 	
+	// To create a Book
 	public Product(BookRequestDTO dto) {
+		this.name = dto.getName();
+		this.price = dto.getPrice();
+		this.quantity = dto.getQuantity();
+	}
+	
+	// To create just Product
+	public Product(ProductRequestDTO dto) {
 		this.name = dto.getName();
 		this.price = dto.getPrice();
 		this.quantity = dto.getQuantity();
