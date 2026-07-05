@@ -28,8 +28,7 @@ public class BookController {
 	
 	@PostMapping(value = "/register")
 	public ResponseEntity<BookResponseDTO> registerBook(@RequestBody BookRequestDTO dto) {
-		BookResponseDTO bookResponse = bookService.registerBook(dto);
-		return ResponseEntity.status(HttpStatus.CREATED).body(bookResponse);
+		return ResponseEntity.status(HttpStatus.CREATED).body(bookService.registerBook(dto));
 	}
 	
 	@GetMapping(value = "/find/{id}")
