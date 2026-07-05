@@ -1,5 +1,8 @@
 package com.nextbook.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.nextbook.entities.Book;
@@ -11,7 +14,6 @@ import com.nextbook.responses.BookFindDetailsResponseDTO;
 import com.nextbook.responses.BookResponseDTO;
 
 import jakarta.transaction.Transactional;
-
 @Service
 public class BookService {
 
@@ -40,5 +42,19 @@ public class BookService {
 				.orElseThrow(() -> new RuntimeException("Book with Id " + id + " not found."));
 		
 		return new BookFindDetailsResponseDTO(book);
+	}
+	
+	public Page<BookResponseDTO> findAllBooks(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Book> books = bookRepository.findAll(pageable);
+		
+		return books.map(BookResponseDTO::new);
+	}
+	
+	public void deleteBook(Long id) {
+	    Book book = bookRepository.findById(id)
+	        .orElseThrow(() -> new RuntimeException("Book with Id: " + id + " not found."));
+	        
+	    bookRepository.delete(book);
 	}
 }
