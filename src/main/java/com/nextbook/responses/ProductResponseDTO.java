@@ -9,12 +9,14 @@ public class ProductResponseDTO {
 	private String name;
 	private BigDecimal price;
 	private int quantity;
+	private String imageUrl;
 	
 	public ProductResponseDTO(Product product) {
 		this.id = product.getId();
 		this.name = product.getName();
 		this.price = product.getPrice();
 		this.quantity = product.getQuantity();
+		this.imageUrl = product.getImageUrl();
 	}
 	
 	public Long getId() {
@@ -28,5 +30,8 @@ public class ProductResponseDTO {
 	}
 	public int getQuantity() {
 		return quantity;
+	}
+	public String getImageUrl() {
+		return imageUrl;
 	}
 }

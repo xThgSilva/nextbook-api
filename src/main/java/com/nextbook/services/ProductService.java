@@ -1,10 +1,14 @@
 package com.nextbook.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 import com.nextbook.entities.Product;
 import com.nextbook.repositories.ProductRepository;
 import com.nextbook.requests.ProductRequestDTO;
+import com.nextbook.responses.ProductAllProductsDTO;
 import com.nextbook.responses.ProductResponseDTO;
 
 @Service
@@ -33,5 +37,12 @@ public class ProductService {
 				.orElseThrow(() -> new RuntimeException("Product with Id: " + id + " not found."));
 	
 		return new ProductResponseDTO(product);
+	}
+	
+	public Page<ProductAllProductsDTO> findAllProducts(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Product> products = productRepository.findAll(pageable);
+		
+		return products.map(ProductAllProductsDTO::new);
 	}
 }

@@ -1,5 +1,6 @@
 package com.nextbook.controllers;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.nextbook.requests.ProductRequestDTO;
+import com.nextbook.responses.ProductAllProductsDTO;
 import com.nextbook.responses.ProductResponseDTO;
 import com.nextbook.services.ProductService;
 
@@ -30,5 +33,10 @@ public class ProductController {
 	@GetMapping(value = "/find/{id}")
 	public ResponseEntity<ProductResponseDTO> findProductById(@PathVariable Long id) {
 		return ResponseEntity.ok(productService.findProductById(id));
+	}
+	
+	@GetMapping(value = "/all/{page}/{size}")
+	public ResponseEntity<Page<ProductAllProductsDTO>> findAllProducts(@PathVariable int page, @PathVariable int size) {
+		return ResponseEntity.ok(productService.findAllProducts(page, size));
 	}
 }

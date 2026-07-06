@@ -6,6 +6,7 @@ public class ProductRequestDTO {
 	private String name;
 	private BigDecimal price;
 	private int quantity;
+	private String imageUrl;
 	
 	public String getName() {
 		return name;
@@ -15,5 +16,8 @@ public class ProductRequestDTO {
 	}
 	public int getQuantity() {
 		return quantity;
+	}
+	public String getImageUrl() {
+		return imageUrl;
 	}
 }

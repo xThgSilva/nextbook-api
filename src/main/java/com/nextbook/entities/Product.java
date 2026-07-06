@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,6 +28,12 @@ public class Product {
 	@Column(nullable = false)
 	private int quantity;
 	
+	@Column(length = 50, nullable = false)
+	private String imageUrl;
+	
+	@OneToOne(mappedBy = "product")
+	private Book book;
+	
 	public Product() { }
 	
 	// To create a Book
@@ -34,6 +41,7 @@ public class Product {
 		this.name = dto.getName();
 		this.price = dto.getPrice();
 		this.quantity = dto.getQuantity();
+		this.imageUrl = dto.getImageUrl();
 	}
 	
 	// To create just Product
@@ -57,5 +65,13 @@ public class Product {
 
 	public int getQuantity() {
 		return quantity;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public Book getBook() {
+		return book;
 	}
 }

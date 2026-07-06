@@ -33,9 +33,6 @@ public class Book {
 	@Column(nullable = false)
 	private LocalDate publicationDate;
 	
-	@Column(length = 50, nullable = false)
-	private String coverUrl;
-	
 	@Column(length = 150, nullable = false)
 	private String description;
 	
@@ -50,7 +47,6 @@ public class Book {
 	public Book(BookRequestDTO dto) {
 		this.author = dto.getAuthor();
 		this.publicationDate = dto.getPublicationDate();
-		this.coverUrl = dto.getCoverUrl();
 		this.description = dto.getDescription();
 		this.category = dto.getCategory();
 		this.availability = dto.getAvailability();
@@ -74,10 +70,6 @@ public class Book {
 
 	public LocalDate getPublicationDate() {
 		return publicationDate;
-	}
-
-	public String getCoverUrl() {
-		return coverUrl;
 	}
 
 	public String getDescription() {

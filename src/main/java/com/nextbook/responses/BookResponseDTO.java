@@ -11,6 +11,7 @@ public class BookResponseDTO {
 	private String name;
 	private String author;
 	private BigDecimal price;
+	private String imageUrl;
 	private Category category;
 	private Availability availability;
 	
@@ -19,6 +20,7 @@ public class BookResponseDTO {
 		this.name = book.getProduct().getName();
 		this.author = book.getAuthor();
 		this.price = book.getProduct().getPrice();
+		this.imageUrl = book.getProduct().getImageUrl();
 		this.category = book.getCategory();
 		this.availability = book.getAvailability();
 	}
@@ -40,5 +42,8 @@ public class BookResponseDTO {
 	}
 	public Availability getAvailability() {
 		return availability;
+	}
+	public String getImageUrl() {
+		return imageUrl;
 	}
 }
