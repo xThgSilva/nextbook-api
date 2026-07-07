@@ -45,4 +45,11 @@ public class ProductService {
 		
 		return products.map(ProductAllProductsDTO::new);
 	}
+	
+	public void deleteProduct(Long id) {
+		Product product = productRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Product with Id: " + id + " not found."));
+		
+		productRepository.delete(product);
+	}
 }

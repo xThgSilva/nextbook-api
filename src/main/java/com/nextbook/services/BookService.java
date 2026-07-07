@@ -18,17 +18,14 @@ import jakarta.transaction.Transactional;
 public class BookService {
 
 	private final BookRepository bookRepository;
-	private final ProductRepository productRepository;
 
 	public BookService(BookRepository bookRepository, ProductRepository productRepository) {
 		this.bookRepository = bookRepository;
-		this.productRepository = productRepository;
 	}
 
 	@Transactional
 	public BookResponseDTO registerBook(BookRequestDTO dto) {
 		Product product = new Product(dto);
-		productRepository.save(product);
 		
 		Book book = new Book(dto);
 		book.setProduct(product);
@@ -49,12 +46,5 @@ public class BookService {
 		Page<Book> books = bookRepository.findAll(pageable);
 		
 		return books.map(BookResponseDTO::new);
-	}
-	
-	public void deleteBookById(Long id) {
-	    Book book = bookRepository.findById(id)
-	        .orElseThrow(() -> new RuntimeException("Book with Id: " + id + " not found."));
-	        
-	    bookRepository.delete(book);
 	}
 }

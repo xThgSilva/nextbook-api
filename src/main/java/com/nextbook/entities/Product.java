@@ -3,6 +3,8 @@ package com.nextbook.entities;
 import java.math.BigDecimal;
 import com.nextbook.requests.BookRequestDTO;
 import com.nextbook.requests.ProductRequestDTO;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +33,7 @@ public class Product {
 	@Column(length = 50, nullable = false)
 	private String imageUrl;
 	
-	@OneToOne(mappedBy = "product")
+	@OneToOne(mappedBy = "product", cascade = CascadeType.REMOVE)
 	private Book book;
 	
 	public Product() { }
@@ -49,6 +51,7 @@ public class Product {
 		this.name = dto.getName();
 		this.price = dto.getPrice();
 		this.quantity = dto.getQuantity();
+		this.imageUrl = dto.getImageUrl();
 	}
 
 	public Long getId() {
