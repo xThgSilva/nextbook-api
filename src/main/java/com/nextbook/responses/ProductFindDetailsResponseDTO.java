@@ -3,11 +3,13 @@ package com.nextbook.responses;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nextbook.entities.Availability;
-import com.nextbook.entities.Book;
 import com.nextbook.entities.Category;
+import com.nextbook.entities.Product;
 
-public class BookFindDetailsResponseDTO {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductFindDetailsResponseDTO {
 	private Long id;
 	private String name;
 	private BigDecimal price;
@@ -19,18 +21,22 @@ public class BookFindDetailsResponseDTO {
 	private Category category;
 	private Availability availability;
 	
-	public BookFindDetailsResponseDTO(Book book) {
-		this.id = book.getId();
-		this.name = book.getProduct().getName();
-		this.price = book.getProduct().getPrice();
-		this.quantity = book.getProduct().getQuantity();
-		this.author = book.getAuthor();
-		this.publicationDate = book.getPublicationDate();
-		this.imageUrl = book.getProduct().getImageUrl();
-		this.description = book.getDescription();
-		this.category = book.getCategory();
-		this.availability = book.getAvailability();
+	public ProductFindDetailsResponseDTO(Product product) {
+		this.id = product.getId();
+		this.name = product.getName();
+		this.price = product.getPrice();
+		this.quantity = product.getQuantity();
+		this.description = product.getDescription();
+		this.imageUrl = product.getImageUrl();
+		
+		if (product.getBook() != null) {
+			this.author = product.getBook().getAuthor();
+			this.publicationDate = product.getBook().getPublicationDate();
+			this.category = product.getBook().getCategory();
+			this.availability = product.getBook().getAvailability();
+		}
 	}
+	
 	public Long getId() {
 		return id;
 	}

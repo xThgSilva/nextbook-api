@@ -34,9 +34,6 @@ public class Book {
 	@Column(nullable = false)
 	private LocalDate publicationDate;
 	
-	@Column(length = 150, nullable = false)
-	private String description;
-	
 	@Enumerated(EnumType.STRING)
 	private Category category;
 	
@@ -48,7 +45,6 @@ public class Book {
 	public Book(BookRequestDTO dto) {
 		this.author = dto.getAuthor();
 		this.publicationDate = dto.getPublicationDate();
-		this.description = dto.getDescription();
 		this.category = dto.getCategory();
 		this.availability = dto.getAvailability();
 	}
@@ -71,10 +67,6 @@ public class Book {
 
 	public LocalDate getPublicationDate() {
 		return publicationDate;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public Category getCategory() {

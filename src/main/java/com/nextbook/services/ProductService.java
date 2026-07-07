@@ -9,6 +9,7 @@ import com.nextbook.entities.Product;
 import com.nextbook.repositories.ProductRepository;
 import com.nextbook.requests.ProductRequestDTO;
 import com.nextbook.responses.ProductAllProductsDTO;
+import com.nextbook.responses.ProductFindDetailsResponseDTO;
 import com.nextbook.responses.ProductResponseDTO;
 
 @Service
@@ -32,11 +33,11 @@ public class ProductService {
 		}
 	}
 	
-	public ProductResponseDTO findProductById(Long id) {
+	public ProductFindDetailsResponseDTO findProductById(Long id) {
 		Product product = productRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Product with Id: " + id + " not found."));
 	
-		return new ProductResponseDTO(product);
+		return new ProductFindDetailsResponseDTO(product);
 	}
 	
 	public Page<ProductAllProductsDTO> findAllProducts(int page, int size) {

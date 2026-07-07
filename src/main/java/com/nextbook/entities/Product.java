@@ -27,6 +27,9 @@ public class Product {
 	@Column(precision = 5, scale = 2, nullable = false)
 	private BigDecimal price;
 	
+	@Column(length = 150, nullable = false)
+	private String description;
+	
 	@Column(nullable = false)
 	private int quantity;
 	
@@ -44,6 +47,7 @@ public class Product {
 		this.price = dto.getPrice();
 		this.quantity = dto.getQuantity();
 		this.imageUrl = dto.getImageUrl();
+		this.description = dto.getDescription();
 	}
 	
 	// To create just Product
@@ -52,6 +56,7 @@ public class Product {
 		this.price = dto.getPrice();
 		this.quantity = dto.getQuantity();
 		this.imageUrl = dto.getImageUrl();
+		this.description = dto.getDescription();
 	}
 
 	public Long getId() {
@@ -76,5 +81,9 @@ public class Product {
 
 	public Book getBook() {
 		return book;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 }

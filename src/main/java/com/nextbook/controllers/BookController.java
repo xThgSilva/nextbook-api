@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.nextbook.requests.BookRequestDTO;
-import com.nextbook.responses.BookFindDetailsResponseDTO;
 import com.nextbook.responses.BookResponseDTO;
 import com.nextbook.services.BookService;
 
@@ -27,11 +26,6 @@ public class BookController {
 	@PostMapping(value = "/register")
 	public ResponseEntity<BookResponseDTO> registerBook(@RequestBody BookRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(bookService.registerBook(dto));
-	}
-	
-	@GetMapping(value = "/find/{id}")
-	public ResponseEntity<BookFindDetailsResponseDTO> findBook(@PathVariable Long id) {
-		return ResponseEntity.ok(bookService.findBookById(id));
 	}
 	
 	@GetMapping(value = "/all/{page}/{size}")

@@ -8,6 +8,7 @@ public class ProductResponseDTO {
 	private Long id;
 	private String name;
 	private BigDecimal price;
+	private String description;
 	private int quantity;
 	private String imageUrl;
 	
@@ -17,6 +18,7 @@ public class ProductResponseDTO {
 		this.price = product.getPrice();
 		this.quantity = product.getQuantity();
 		this.imageUrl = product.getImageUrl();
+		this.description = product.getDescription();
 	}
 	
 	public Long getId() {
@@ -33,5 +35,8 @@ public class ProductResponseDTO {
 	}
 	public String getImageUrl() {
 		return imageUrl;
+	}
+	public String getDescription() {
+		return description;
 	}
 }
