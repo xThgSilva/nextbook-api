@@ -1,10 +1,12 @@
 package com.nextbook.services;
 
 import java.time.LocalDateTime;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import com.nextbook.entities.Book;
 import com.nextbook.entities.Loan;
 import com.nextbook.entities.ReturnStatus;
@@ -14,7 +16,8 @@ import com.nextbook.repositories.LoanRepository;
 import com.nextbook.repositories.UserRepository;
 import com.nextbook.requests.LoanRequestDTO;
 import com.nextbook.responses.LoanAllLoansResponseDTO;
-import com.nextbook.responses.LoanResponseDTO;
+import com.nextbook.responses.LoanCreatedResponseDTO;
+import com.nextbook.responses.LoanDetailsLoanResponseDTO;
 
 @Service
 public class LoanService {
@@ -29,7 +32,7 @@ public class LoanService {
 		this.bookRepository = bookRepository;
 	}
 
-	public LoanResponseDTO createLoan(LoanRequestDTO dto) {
+	public LoanCreatedResponseDTO createLoan(LoanRequestDTO dto) {
 		Loan loan = new Loan(dto);
 		
 		User userLoan = userRepository.findById(dto.getUserId())
@@ -45,14 +48,14 @@ public class LoanService {
 		
 		loanRepository.save(loan);
 		
-		return new LoanResponseDTO(loan);
+		return new LoanCreatedResponseDTO(loan);
 	}
 	
-	public LoanAllLoansResponseDTO findLoanById(Long id) {
+	public LoanDetailsLoanResponseDTO findLoanById(Long id) {
 		Loan loan = loanRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Loan with Id: " + id + " not found."));
 		
-		return new LoanAllLoansResponseDTO(loan);
+		return new LoanDetailsLoanResponseDTO(loan);
 	}
 	
 	public Page<LoanAllLoansResponseDTO> findAllLoans(int page, int size) {

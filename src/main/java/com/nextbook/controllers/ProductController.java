@@ -28,17 +28,17 @@ public class ProductController {
 		this.productService = productService;
 	}
 	
-	@PostMapping(value = "/register")
+	@PostMapping
 	public ResponseEntity<ProductResponseDTO> registerProduct(@RequestBody ProductRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(productService.registerProduct(dto));
 	}
 	
-	@GetMapping(value = "/find/{id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<ProductFindDetailsResponseDTO> findProductById(@PathVariable Long id) {
 		return ResponseEntity.ok(productService.findProductById(id));
 	}
 	
-	@GetMapping(value = "/all/{page}/{size}")
+	@GetMapping(value = "/{page}/{size}")
 	public ResponseEntity<Page<ProductAllProductsDTO>> findAllProducts(@PathVariable int page, @PathVariable int size) {
 		return ResponseEntity.ok(productService.findAllProducts(page, size));
 	}

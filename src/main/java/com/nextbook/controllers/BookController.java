@@ -23,12 +23,12 @@ public class BookController {
 		this.bookService = bookService;
 	}
 	
-	@PostMapping(value = "/register")
+	@PostMapping
 	public ResponseEntity<BookResponseDTO> registerBook(@RequestBody BookRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(bookService.registerBook(dto));
 	}
 	
-	@GetMapping(value = "/all/{page}/{size}")
+	@GetMapping(value = "/{page}/{size}")
 	public ResponseEntity<Page<BookResponseDTO>> findAllBooks(@PathVariable int page, @PathVariable int size) {
 		return ResponseEntity.ok(bookService.findAllBooks(page, size));
 	}

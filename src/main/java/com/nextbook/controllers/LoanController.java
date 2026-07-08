@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nextbook.requests.LoanRequestDTO;
 import com.nextbook.responses.LoanAllLoansResponseDTO;
-import com.nextbook.responses.LoanResponseDTO;
+import com.nextbook.responses.LoanCreatedResponseDTO;
+import com.nextbook.responses.LoanDetailsLoanResponseDTO;
 import com.nextbook.services.LoanService;
 
 @RestController
@@ -25,17 +26,17 @@ public class LoanController {
 		this.loanService = loanService;
 	}
 
-	@PostMapping(value = "/create")
-	public ResponseEntity<LoanResponseDTO> createLoan(@RequestBody LoanRequestDTO dto) {
+	@PostMapping
+	public ResponseEntity<LoanCreatedResponseDTO> createLoan(@RequestBody LoanRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(loanService.createLoan(dto));
 	}
 	
-	@GetMapping("/find/{id}")
-	public ResponseEntity<LoanAllLoansResponseDTO> findLoanById(@PathVariable Long id) {
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<LoanDetailsLoanResponseDTO> findLoanById(@PathVariable Long id) {
 		return ResponseEntity.ok(loanService.findLoanById(id));
 	}
 	
-	@GetMapping(value = "/all/{page}/{size}")
+	@GetMapping(value = "/{page}/{size}")
 	public ResponseEntity<Page<LoanAllLoansResponseDTO>> findAllLoans(@PathVariable int page, @PathVariable int size) {
 		return ResponseEntity.ok(loanService.findAllLoans(page, size));
 	}
