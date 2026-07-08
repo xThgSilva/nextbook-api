@@ -3,9 +3,7 @@ package com.nextbook.entities;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import com.nextbook.responses.SaleItemResponseDTO;
-
+import com.nextbook.requests.SaleItemRequestDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,7 +34,7 @@ public class Sale {
 	private BigDecimal totalSale;
 	
 	@OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
-	private List<SaleItemResponseDTO> saleItems;
+	private List<SaleItem> saleItems;
 	
 	public Sale() {	}
 
@@ -52,10 +50,19 @@ public class Sale {
 	public LocalDateTime getSaleDate() {
 		return saleDate;
 	}
+	public void setSaleDate(LocalDateTime saleDate) {
+		this.saleDate = saleDate;
+	}
 	public BigDecimal getTotalSale() {
 		return totalSale;
 	}
-	public List<SaleItemResponseDTO> getSaleItems() {
+	public void setTotalSale(BigDecimal totalSale) {
+		this.totalSale = totalSale;
+	}
+	public void setSaleItems(List<SaleItem> saleItems) {
+		this.saleItems = saleItems;
+	}
+	public List<SaleItem> getSaleItems() {
 		return saleItems;
 	}
 }

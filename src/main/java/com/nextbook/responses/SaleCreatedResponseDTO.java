@@ -18,7 +18,7 @@ public class SaleCreatedResponseDTO {
 		this.username = sale.getUser().getName();
 		this.saleDate = sale.getSaleDate();
 		this.totalSale = sale.getTotalSale();
-		this.saleItems = sale.getSaleItems();
+		this.saleItems = sale.getSaleItems().stream().map(SaleItemResponseDTO::new).toList();
 	}
 	
 	public Long getId() {
