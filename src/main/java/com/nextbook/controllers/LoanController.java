@@ -30,6 +30,11 @@ public class LoanController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(loanService.createLoan(dto));
 	}
 	
+	@GetMapping("/find/{id}")
+	public ResponseEntity<LoanAllLoansResponseDTO> findLoanById(@PathVariable Long id) {
+		return ResponseEntity.ok(loanService.findLoanById(id));
+	}
+	
 	@GetMapping(value = "/all/{page}/{size}")
 	public ResponseEntity<Page<LoanAllLoansResponseDTO>> findAllLoans(@PathVariable int page, @PathVariable int size) {
 		return ResponseEntity.ok(loanService.findAllLoans(page, size));

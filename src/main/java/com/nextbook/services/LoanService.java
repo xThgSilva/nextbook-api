@@ -48,6 +48,13 @@ public class LoanService {
 		return new LoanResponseDTO(loan);
 	}
 	
+	public LoanAllLoansResponseDTO findLoanById(Long id) {
+		Loan loan = loanRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Loan with Id: " + id + " not found."));
+		
+		return new LoanAllLoansResponseDTO(loan);
+	}
+	
 	public Page<LoanAllLoansResponseDTO> findAllLoans(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Loan> loans = loanRepository.findAll(pageable);
