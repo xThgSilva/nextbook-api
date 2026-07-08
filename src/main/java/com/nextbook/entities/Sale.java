@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.nextbook.responses.SaleItemResponseDTO;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,8 +35,8 @@ public class Sale {
 	@Column(nullable = false, precision = 5, scale = 2)
 	private BigDecimal totalSale;
 	
-	@OneToMany(mappedBy = "sale")
-	private List<SaleItem> saleItems;
+	@OneToMany(mappedBy = "sale", cascade = CascadeType.PERSIST)
+	private List<SaleItemResponseDTO> saleItems;
 	
 	public Sale() {	}
 
@@ -52,7 +55,7 @@ public class Sale {
 	public BigDecimal getTotalSale() {
 		return totalSale;
 	}
-	public List<SaleItem> getSaleItems() {
+	public List<SaleItemResponseDTO> getSaleItems() {
 		return saleItems;
 	}
 }
