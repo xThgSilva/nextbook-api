@@ -1,39 +1,18 @@
 package com.nextbook.responses;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.nextbook.entities.Sale;
 
-public class SaleCreatedResponseDTO {
-	private Long id;
-	private String costomerName;
-	private LocalDateTime saleDate;
-	private BigDecimal totalSale;
+public class SaleCreatedResponseDTO extends SaleAllSalesResponseDTO{
 	private List<SaleItemResponseDTO> saleItems;
 	
 	public SaleCreatedResponseDTO(Sale sale) {
-		this.id = sale.getId();
-		this.costomerName = sale.getUser().getName();
-		this.saleDate = sale.getSaleDate();
-		this.totalSale = sale.getTotalSale();
+		super(sale);
 		this.saleItems = sale.getSaleItems().stream().map(SaleItemResponseDTO::new).toList();
 	}
 	
-	public Long getId() {
-		return id;
-	}
-	public String getCostumerName() {
-		return costomerName;
-	}
-	public LocalDateTime getSaleDate() {
-		return saleDate;
-	}
 	public List<SaleItemResponseDTO> getSaleItems() {
 		return saleItems;
-	}
-	public BigDecimal getTotalSale() {
-		return totalSale;
 	}
 }
