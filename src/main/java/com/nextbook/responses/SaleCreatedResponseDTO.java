@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.nextbook.entities.Sale;
 
-public class SaleCreatedResponseDTO extends SaleAllSalesResponseDTO{
+public class SaleCreatedResponseDTO extends SaleBaseResponseDTO{
 	private List<SaleItemResponseDTO> saleItems;
 	
 	public SaleCreatedResponseDTO(Sale sale) {
