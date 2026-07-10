@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.nextbook.entities.User;
 import com.nextbook.repositories.UserRepository;
 import com.nextbook.requests.UserRequestDTO;
-import com.nextbook.responses.UserResponseDTO;
+import com.nextbook.responses.UserCreatedResponseDTO;
 
 @Service
 public class UserService {
@@ -19,7 +19,7 @@ public class UserService {
 	}
 	
 	// TODO - Errors pattern
-	public UserResponseDTO register(UserRequestDTO dto) {
+	public UserCreatedResponseDTO register(UserRequestDTO dto) {
 		Optional<User> emailExists = userRepository.findByEmail(dto.getEmail());
 		
 		if (emailExists.isPresent())
@@ -31,6 +31,6 @@ public class UserService {
 			User user = new User(dto);
 			userRepository.save(user);
 			
-			return new UserResponseDTO(user);
+			return new UserCreatedResponseDTO(user);
 	}
 }

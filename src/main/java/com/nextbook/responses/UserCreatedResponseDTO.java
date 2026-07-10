@@ -2,12 +2,12 @@ package com.nextbook.responses;
 
 import com.nextbook.entities.User;
 
-public class UserResponseDTO {
+public class UserCreatedResponseDTO {
 	private Long id;
 	private String name;
 	private String email;
 	
-	public UserResponseDTO(User user) {
+	public UserCreatedResponseDTO(User user) {
 		this.id = user.getId();
 		this.name = user.getName();
 		this.email = user.getEmail();

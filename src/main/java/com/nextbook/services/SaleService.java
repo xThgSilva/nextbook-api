@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.nextbook.entities.Product;
@@ -16,6 +19,7 @@ import com.nextbook.repositories.SaleRepository;
 import com.nextbook.repositories.UserRepository;
 import com.nextbook.requests.SaleItemRequestDTO;
 import com.nextbook.requests.SaleRequestDTO;
+import com.nextbook.responses.SaleAllSalesResponseDTO;
 import com.nextbook.responses.SaleCreatedResponseDTO;
 
 import jakarta.transaction.Transactional;
@@ -69,5 +73,12 @@ public class SaleService {
 		saleRepository.save(sale);
 		
 		return new SaleCreatedResponseDTO(sale);
+	}
+	
+	public Page<SaleAllSalesResponseDTO> findAllSales(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Sale> sales = saleRepository.findAll(pageable);
+		
+		return sales.map(SaleAllSalesResponseDTO::new);
 	}
 }

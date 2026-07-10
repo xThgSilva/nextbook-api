@@ -4,7 +4,7 @@ import com.nextbook.entities.Availability;
 import com.nextbook.entities.Category;
 import com.nextbook.entities.Product;
 
-public class ProductAllProductsDTO extends ProductResponseDTO{
+public class ProductAllProductsDTO extends ProductCreatedResponseDTO{
 	public Long bookId;
 	private String author;
 	private Category category;

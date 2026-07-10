@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.nextbook.requests.UserRequestDTO;
-import com.nextbook.responses.UserResponseDTO;
+import com.nextbook.responses.UserCreatedResponseDTO;
 import com.nextbook.services.UserService;
 
 @RestController
@@ -21,7 +21,7 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/register")
-	public ResponseEntity<UserResponseDTO> registerUser(@RequestBody UserRequestDTO dto) {
+	public ResponseEntity<UserCreatedResponseDTO> registerUser(@RequestBody UserRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(dto));
 	}
 }

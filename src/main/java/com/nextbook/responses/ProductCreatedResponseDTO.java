@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import com.nextbook.entities.Product;
 
-public class ProductResponseDTO {
+public class ProductCreatedResponseDTO {
 	private Long id;
 	private String name;
 	private BigDecimal price;
@@ -12,7 +12,7 @@ public class ProductResponseDTO {
 	private int quantity;
 	private String imageUrl;
 	
-	public ProductResponseDTO(Product product) {
+	public ProductCreatedResponseDTO(Product product) {
 		this.id = product.getId();
 		this.name = product.getName();
 		this.price = product.getPrice();

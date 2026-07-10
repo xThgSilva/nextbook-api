@@ -10,7 +10,7 @@ import com.nextbook.repositories.ProductRepository;
 import com.nextbook.requests.ProductRequestDTO;
 import com.nextbook.responses.ProductAllProductsDTO;
 import com.nextbook.responses.ProductFindDetailsResponseDTO;
-import com.nextbook.responses.ProductResponseDTO;
+import com.nextbook.responses.ProductCreatedResponseDTO;
 
 @Service
 public class ProductService {
@@ -21,12 +21,12 @@ public class ProductService {
 		this.productRepository = productRepository;
 	}
 	
-	public ProductResponseDTO registerProduct(ProductRequestDTO dto) {
+	public ProductCreatedResponseDTO registerProduct(ProductRequestDTO dto) {
 		if (dto.getPrice().compareTo(BigDecimal.ZERO) > 0 && dto.getQuantity() > 0 && dto.getName() != "") {
 			Product product = new Product(dto);
 			productRepository.save(product);	
 			
-			return new ProductResponseDTO(product);
+			return new ProductCreatedResponseDTO(product);
 		}
 		else {
 			throw new RuntimeException("Invalid data to create product.");

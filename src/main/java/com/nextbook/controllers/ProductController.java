@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nextbook.requests.ProductRequestDTO;
 import com.nextbook.responses.ProductAllProductsDTO;
 import com.nextbook.responses.ProductFindDetailsResponseDTO;
-import com.nextbook.responses.ProductResponseDTO;
+import com.nextbook.responses.ProductCreatedResponseDTO;
 import com.nextbook.services.ProductService;
 
 @RestController
@@ -29,7 +29,7 @@ public class ProductController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ProductResponseDTO> registerProduct(@RequestBody ProductRequestDTO dto) {
+	public ResponseEntity<ProductCreatedResponseDTO> registerProduct(@RequestBody ProductRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(productService.registerProduct(dto));
 	}
 	
