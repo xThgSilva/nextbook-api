@@ -1,5 +1,7 @@
 package com.nextbook.controllers;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +35,11 @@ public class SaleController {
 	@GetMapping(value = "/{page}/{size}")
 	public ResponseEntity<Page<SaleAllSalesResponseDTO>> findAllSales(@PathVariable int page, @PathVariable int size) {
 		return ResponseEntity.ok(saleService.findAllSales(page, size));
+	}
+	
+	@GetMapping(value = "/{start}/{end}/{page}/{size}")
+	public ResponseEntity<Page<SaleAllSalesResponseDTO>> filterSalesBetweenDate(@PathVariable LocalDate start, @PathVariable LocalDate end, 
+			@PathVariable int page, @PathVariable int size) {
+		return ResponseEntity.ok(saleService.filterSalesBetweenDate(page, size, start, end));
 	}
 }

@@ -1,7 +1,9 @@
 package com.nextbook.services;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,4 +83,15 @@ public class SaleService {
 		
 		return sales.map(SaleAllSalesResponseDTO::new);
 	}
+	
+	public Page<SaleAllSalesResponseDTO> filterSalesBetweenDate(int page, int size, LocalDate startDate, LocalDate endDate) {
+		Pageable pageable = PageRequest.of(page, size);
+		
+		LocalDateTime start = startDate.atStartOfDay();
+		LocalDateTime end = endDate.atTime(LocalTime.MAX);
+		
+		Page<Sale> sales = saleRepository.findBySaleDateBetween(start, end, pageable);
+		
+		return sales.map(SaleAllSalesResponseDTO::new);
+	} 
 }
