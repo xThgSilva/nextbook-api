@@ -5,11 +5,14 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.nextbook.entities.Loan;
 import com.nextbook.entities.Sale;
 import com.nextbook.entities.User;
+import com.nextbook.repositories.LoanRepository;
 import com.nextbook.repositories.SaleRepository;
 import com.nextbook.repositories.UserRepository;
 import com.nextbook.requests.UserRequestDTO;
+import com.nextbook.responses.LoanAllLoansResponseDTO;
 import com.nextbook.responses.SaleAllSalesResponseDTO;
 import com.nextbook.responses.UserCreatedResponseDTO;
 
@@ -18,10 +21,12 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final SaleRepository saleRepository;
+	private final LoanRepository loanRepository;
 
-	public UserService(UserRepository userRepository, SaleRepository saleRepository) {
+	public UserService(UserRepository userRepository, SaleRepository saleRepository, LoanRepository loanRepository) {
 		this.userRepository = userRepository;
 		this.saleRepository = saleRepository;
+		this.loanRepository = loanRepository;
 	}
 
 	// TODO - Errors pattern
@@ -46,5 +51,13 @@ public class UserService {
 		
 		List<Sale> sales = saleRepository.findByUserId(id);
 		return sales.stream().map(SaleAllSalesResponseDTO::new).toList();
+	}
+	
+	public List<LoanAllLoansResponseDTO> findAllUserLoans(Long id) {
+		userRepository.findById(id)
+			.orElseThrow(() -> new RuntimeException("User with Id: " + id + " not found."));
+		
+		List<Loan> loans = loanRepository.findByUserId(id);
+		return loans.stream().map(LoanAllLoansResponseDTO::new).toList();
 	}
 }

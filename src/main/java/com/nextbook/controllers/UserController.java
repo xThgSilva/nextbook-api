@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nextbook.requests.UserRequestDTO;
+import com.nextbook.responses.LoanAllLoansResponseDTO;
 import com.nextbook.responses.SaleAllSalesResponseDTO;
 import com.nextbook.responses.UserCreatedResponseDTO;
 import com.nextbook.services.UserService;
@@ -34,5 +35,10 @@ public class UserController {
 	@GetMapping(value = "/{id}/sales")
 	public ResponseEntity<List<SaleAllSalesResponseDTO>> findAllUserSales(@PathVariable Long id) {
 		return ResponseEntity.ok(userService.findAllUserSales(id));
+	}
+	
+	@GetMapping(value = "/{id}/loans")
+	public ResponseEntity<List<LoanAllLoansResponseDTO>> findAllUserLoans(@PathVariable Long id) {
+		return ResponseEntity.ok(userService.findAllUserLoans(id));
 	}
 }
