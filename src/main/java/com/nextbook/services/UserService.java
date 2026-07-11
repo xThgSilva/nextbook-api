@@ -14,6 +14,7 @@ import com.nextbook.repositories.UserRepository;
 import com.nextbook.requests.UserRequestDTO;
 import com.nextbook.responses.LoanAllLoansResponseDTO;
 import com.nextbook.responses.SaleAllSalesResponseDTO;
+import com.nextbook.responses.UserAllUsersResponseDTO;
 import com.nextbook.responses.UserCreatedResponseDTO;
 
 @Service
@@ -43,6 +44,11 @@ public class UserService {
 			userRepository.save(user);
 			
 			return new UserCreatedResponseDTO(user);
+	}
+	
+	public List<UserAllUsersResponseDTO> findAllUsers(){
+		List<User> users = userRepository.findAll();
+		return users.stream().map(UserAllUsersResponseDTO::new).toList();
 	}
 	
 	public List<SaleAllSalesResponseDTO> findAllUserSales(Long id) {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nextbook.requests.UserRequestDTO;
 import com.nextbook.responses.LoanAllLoansResponseDTO;
 import com.nextbook.responses.SaleAllSalesResponseDTO;
+import com.nextbook.responses.UserAllUsersResponseDTO;
 import com.nextbook.responses.UserCreatedResponseDTO;
 import com.nextbook.services.UserService;
 
@@ -27,9 +28,14 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@PostMapping(value = "/register")
+	@PostMapping
 	public ResponseEntity<UserCreatedResponseDTO> registerUser(@RequestBody UserRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(dto));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<UserAllUsersResponseDTO>> findAllUser() {
+		return ResponseEntity.ok(userService.findAllUsers());
 	}
 	
 	@GetMapping(value = "/{id}/sales")
