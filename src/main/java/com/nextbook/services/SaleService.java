@@ -41,7 +41,7 @@ public class SaleService {
 	@Transactional
 	public SaleCreatedResponseDTO registerSale(SaleRequestDTO dto) {
 		User user = userRepository.findById(dto.getUserId())
-				.orElseThrow(() -> new RuntimeException("User with Id: " + dto.getUserId() + " not found."));
+				.orElseThrow(() -> new RuntimeException("User with Id " + dto.getUserId() + " not found."));
 		
 		Sale sale = new Sale();
 		sale.setUser(user);
@@ -51,7 +51,7 @@ public class SaleService {
 		
 		for (SaleItemRequestDTO item : dto.getSaleItems()) {
 			Product product = productRepository.findById(item.getProductId())
-					.orElseThrow(() -> new RuntimeException("Product with Id: " + item.getProductId() + " not found."));
+					.orElseThrow(() -> new RuntimeException("Product with Id " + item.getProductId() + " not found."));
 			
 			SaleItem saleItem = new SaleItem();
 			saleItem.setSale(sale);

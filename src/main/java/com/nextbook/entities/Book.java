@@ -35,9 +35,11 @@ public class Book {
 	private LocalDate publicationDate;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private Category category;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private Availability availability;
 	
 	public Book() {	}

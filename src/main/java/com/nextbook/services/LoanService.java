@@ -17,7 +17,7 @@ import com.nextbook.repositories.UserRepository;
 import com.nextbook.requests.LoanRequestDTO;
 import com.nextbook.responses.LoanAllLoansResponseDTO;
 import com.nextbook.responses.LoanCreatedResponseDTO;
-import com.nextbook.responses.LoanDetailsLoanResponseDTO;
+import com.nextbook.responses.LoanDetailsResponseDTO;
 
 @Service
 public class LoanService {
@@ -36,10 +36,10 @@ public class LoanService {
 		Loan loan = new Loan(dto);
 		
 		User userLoan = userRepository.findById(dto.getUserId())
-				.orElseThrow(() -> new RuntimeException("User with Id: " + dto.getUserId() + "not found."));
+				.orElseThrow(() -> new RuntimeException("User with Id " + dto.getUserId() + "not found."));
 		
 		Book bookLoan = bookRepository.findById(dto.getBookId())
-				.orElseThrow(() -> new RuntimeException("Book with Id: " + dto.getBookId() + " not found."));
+				.orElseThrow(() -> new RuntimeException("Book with Id " + dto.getBookId() + " not found."));
 		
 		loan.setLoanDate(LocalDateTime.now());
 		loan.setReturnStatus(ReturnStatus.IN_PROGRESS);
@@ -51,11 +51,11 @@ public class LoanService {
 		return new LoanCreatedResponseDTO(loan);
 	}
 	
-	public LoanDetailsLoanResponseDTO findLoanById(Long id) {
+	public LoanDetailsResponseDTO findLoanById(Long id) {
 		Loan loan = loanRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Loan with Id: " + id + " not found."));
+				.orElseThrow(() -> new RuntimeException("Loan with Id " + id + " not found."));
 		
-		return new LoanDetailsLoanResponseDTO(loan);
+		return new LoanDetailsResponseDTO(loan);
 	}
 	
 	public Page<LoanAllLoansResponseDTO> findAllLoans(int page, int size) {

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.nextbook.entities.Loan;
+import com.nextbook.entities.Role;
 import com.nextbook.entities.Sale;
 import com.nextbook.entities.User;
 import com.nextbook.repositories.LoanRepository;
@@ -16,6 +17,7 @@ import com.nextbook.responses.LoanAllLoansResponseDTO;
 import com.nextbook.responses.SaleAllSalesResponseDTO;
 import com.nextbook.responses.UserAllUsersResponseDTO;
 import com.nextbook.responses.UserCreatedResponseDTO;
+import com.nextbook.responses.UserDetailsResponseDTO;
 
 @Service
 public class UserService {
@@ -41,9 +43,17 @@ public class UserService {
 			throw new RuntimeException("The password confirmation must match the password.");
 
 			User user = new User(dto);
+			user.setRole(Role.USER);
 			userRepository.save(user);
 			
 			return new UserCreatedResponseDTO(user);
+	}
+	
+	public UserDetailsResponseDTO findUserById(Long id) {
+		User user = userRepository.findById(id)
+			.orElseThrow(() -> new RuntimeException("User with Id " + id + " not found."));
+
+		return new UserDetailsResponseDTO(user);
 	}
 	
 	public List<UserAllUsersResponseDTO> findAllUsers(){
@@ -53,7 +63,7 @@ public class UserService {
 	
 	public List<SaleAllSalesResponseDTO> findAllUserSales(Long id) {
 		userRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("User with Id: " + id + " not found."));
+				.orElseThrow(() -> new RuntimeException("User with Id " + id + " not found."));
 		
 		List<Sale> sales = saleRepository.findByUserId(id);
 		return sales.stream().map(SaleAllSalesResponseDTO::new).toList();
@@ -61,7 +71,7 @@ public class UserService {
 	
 	public List<LoanAllLoansResponseDTO> findAllUserLoans(Long id) {
 		userRepository.findById(id)
-			.orElseThrow(() -> new RuntimeException("User with Id: " + id + " not found."));
+			.orElseThrow(() -> new RuntimeException("User with Id " + id + " not found."));
 		
 		List<Loan> loans = loanRepository.findByUserId(id);
 		return loans.stream().map(LoanAllLoansResponseDTO::new).toList();

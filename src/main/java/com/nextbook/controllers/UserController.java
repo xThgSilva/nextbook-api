@@ -16,6 +16,7 @@ import com.nextbook.responses.LoanAllLoansResponseDTO;
 import com.nextbook.responses.SaleAllSalesResponseDTO;
 import com.nextbook.responses.UserAllUsersResponseDTO;
 import com.nextbook.responses.UserCreatedResponseDTO;
+import com.nextbook.responses.UserDetailsResponseDTO;
 import com.nextbook.services.UserService;
 
 @RestController
@@ -36,6 +37,11 @@ public class UserController {
 	@GetMapping
 	public ResponseEntity<List<UserAllUsersResponseDTO>> findAllUser() {
 		return ResponseEntity.ok(userService.findAllUsers());
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<UserDetailsResponseDTO> findUserById(@PathVariable Long id) {
+		return ResponseEntity.ok(userService.findUserById(id));
 	}
 	
 	@GetMapping(value = "/{id}/sales")

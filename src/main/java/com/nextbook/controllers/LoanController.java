@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nextbook.requests.LoanRequestDTO;
 import com.nextbook.responses.LoanAllLoansResponseDTO;
 import com.nextbook.responses.LoanCreatedResponseDTO;
-import com.nextbook.responses.LoanDetailsLoanResponseDTO;
+import com.nextbook.responses.LoanDetailsResponseDTO;
 import com.nextbook.services.LoanService;
 
 @RestController
@@ -32,7 +32,7 @@ public class LoanController {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<LoanDetailsLoanResponseDTO> findLoanById(@PathVariable Long id) {
+	public ResponseEntity<LoanDetailsResponseDTO> findLoanById(@PathVariable Long id) {
 		return ResponseEntity.ok(loanService.findLoanById(id));
 	}
 	

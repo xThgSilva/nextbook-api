@@ -1,8 +1,11 @@
 package com.nextbook.entities;
 
 import com.nextbook.requests.UserRequestDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,12 +34,16 @@ public class User {
 	@Column(nullable = false)
 	private int age;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Role role;
+	
 	public User() { }
 	
 	public User(UserRequestDTO dto) {
 		this.name = dto.getName();
 		this.email = dto.getEmail();
-		this.password = dto.getEmail();
+		this.password = dto.getPassword();
 		this.phone = dto.getPhone();
 		this.age = dto.getAge();
 	}
@@ -58,5 +65,11 @@ public class User {
 	}
 	public int getAge() {
 		return age;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
 	}
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nextbook.requests.ProductRequestDTO;
 import com.nextbook.responses.ProductAllProductsDTO;
-import com.nextbook.responses.ProductFindDetailsResponseDTO;
+import com.nextbook.responses.ProductDetailsResponseDTO;
 import com.nextbook.responses.ProductCreatedResponseDTO;
 import com.nextbook.services.ProductService;
 
@@ -34,7 +34,7 @@ public class ProductController {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<ProductFindDetailsResponseDTO> findProductById(@PathVariable Long id) {
+	public ResponseEntity<ProductDetailsResponseDTO> findProductById(@PathVariable Long id) {
 		return ResponseEntity.ok(productService.findProductById(id));
 	}
 	

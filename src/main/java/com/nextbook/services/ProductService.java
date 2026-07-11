@@ -9,7 +9,7 @@ import com.nextbook.entities.Product;
 import com.nextbook.repositories.ProductRepository;
 import com.nextbook.requests.ProductRequestDTO;
 import com.nextbook.responses.ProductAllProductsDTO;
-import com.nextbook.responses.ProductFindDetailsResponseDTO;
+import com.nextbook.responses.ProductDetailsResponseDTO;
 import com.nextbook.responses.ProductCreatedResponseDTO;
 
 @Service
@@ -33,11 +33,11 @@ public class ProductService {
 		}
 	}
 	
-	public ProductFindDetailsResponseDTO findProductById(Long id) {
+	public ProductDetailsResponseDTO findProductById(Long id) {
 		Product product = productRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Product with Id: " + id + " not found."));
+				.orElseThrow(() -> new RuntimeException("Product with Id " + id + " not found."));
 	
-		return new ProductFindDetailsResponseDTO(product);
+		return new ProductDetailsResponseDTO(product);
 	}
 	
 	public Page<ProductAllProductsDTO> findAllProducts(int page, int size) {
@@ -49,7 +49,7 @@ public class ProductService {
 	
 	public void deleteProduct(Long id) {
 		Product product = productRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Product with Id: " + id + " not found."));
+				.orElseThrow(() -> new RuntimeException("Product with Id " + id + " not found."));
 		
 		productRepository.delete(product);
 	}

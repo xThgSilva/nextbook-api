@@ -9,7 +9,7 @@ import com.nextbook.entities.Category;
 import com.nextbook.entities.Product;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductFindDetailsResponseDTO {
+public class ProductDetailsResponseDTO {
 	private Long id;
 	private String name;
 	private BigDecimal price;
@@ -21,7 +21,7 @@ public class ProductFindDetailsResponseDTO {
 	private Category category;
 	private Availability availability;
 	
-	public ProductFindDetailsResponseDTO(Product product) {
+	public ProductDetailsResponseDTO(Product product) {
 		this.id = product.getId();
 		this.name = product.getName();
 		this.price = product.getPrice();

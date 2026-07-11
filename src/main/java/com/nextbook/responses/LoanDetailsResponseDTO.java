@@ -5,13 +5,13 @@ import java.time.LocalDate;
 import com.nextbook.entities.Loan;
 import com.nextbook.entities.ReturnStatus;
 
-public class LoanDetailsLoanResponseDTO extends LoanBaseResponseDTO {
+public class LoanDetailsResponseDTO extends LoanBaseResponseDTO {
     private LocalDate expectedReturnDate;
     private LocalDate returnDate;
     private ReturnStatus returnStatus;
     private String bookAuthor;
 
-    public LoanDetailsLoanResponseDTO(Loan loan) {
+    public LoanDetailsResponseDTO(Loan loan) {
         super(loan);
         this.expectedReturnDate = loan.getExpectedReturnDate();
         this.returnDate = loan.getReturnDate();
