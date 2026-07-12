@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nextbook.requests.LoanRequestDTO;
@@ -37,7 +38,9 @@ public class LoanController {
 	}
 	
 	@GetMapping(value = "/{page}/{size}")
-	public ResponseEntity<Page<LoanAllLoansResponseDTO>> findAllLoans(@PathVariable int page, @PathVariable int size) {
+	public ResponseEntity<Page<LoanAllLoansResponseDTO>> findAllLoans(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
 		return ResponseEntity.ok(loanService.findAllLoans(page, size));
 	}
 }

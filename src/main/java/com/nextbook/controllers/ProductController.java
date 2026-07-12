@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,7 +42,9 @@ public class ProductController {
 	}
 	
 	@GetMapping(value = "/{page}/{size}")
-	public ResponseEntity<Page<ProductAllProductsDTO>> findAllProducts(@PathVariable int page, @PathVariable int size) {
+	public ResponseEntity<Page<ProductAllProductsDTO>> findAllProducts(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
 		return ResponseEntity.ok(productService.findAllProducts(page, size));
 	}
 	
@@ -52,7 +55,9 @@ public class ProductController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ProductDetailsResponseDTO> updateProductById(@PathVariable Long id, @RequestBody ProductUpdateRequestDTO dto) {
+	public ResponseEntity<ProductDetailsResponseDTO> updateProductById(
+			@PathVariable Long id, 
+			@RequestBody ProductUpdateRequestDTO dto) {
 		return ResponseEntity.ok(productService.updateProductById(id, dto));
 	}
 }
