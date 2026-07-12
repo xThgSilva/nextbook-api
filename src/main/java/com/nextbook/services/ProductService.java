@@ -58,10 +58,12 @@ public class ProductService {
 		product.setQuantity(dto.getQuantity());
 		product.setPrice(dto.getPrice());
 		product.setDescription(dto.getDescription());
-		product.getBook().setAuthor(dto.getAuthor());
+		
+		if (product.getBook() != null) {
+	        product.getBook().setAuthor(dto.getAuthor());
+	    }
 		
 		productRepository.save(product);
-		
 		return new ProductDetailsResponseDTO(product);
 	}
 	

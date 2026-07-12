@@ -2,26 +2,16 @@ package com.nextbook.requests;
 
 import java.math.BigDecimal;
 
-public class ProductUpdateRequestDTO {
-	private String name;
-	private BigDecimal price;
-	private int quantity;
+public class ProductUpdateRequestDTO extends ProductBaseRequestDTO{
 	private String author;
-	private String description;
 	
-	public String getName() {
-		return name;
+	public ProductUpdateRequestDTO(String name, BigDecimal price, String description, int quantity, String imageUrl,
+			String author) {
+		super(name, price, description, quantity, imageUrl);
+		this.author = author;
 	}
-	public BigDecimal getPrice() {
-		return price;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
+
 	public String getAuthor() {
 		return author;
-	}
-	public String getDescription() {
-		return description;
 	}
 }

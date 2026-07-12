@@ -1,10 +1,12 @@
 package com.nextbook.responses;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nextbook.entities.Availability;
 import com.nextbook.entities.Category;
 import com.nextbook.entities.Product;
 
-public class ProductAllProductsDTO extends ProductCreatedResponseDTO{
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductAllProductsDTO extends ProductBaseResponseDTO{
 	public Long bookId;
 	private String author;
 	private Category category;

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.nextbook.entities.Book;
 import com.nextbook.entities.Product;
 import com.nextbook.repositories.BookRepository;
-import com.nextbook.repositories.ProductRepository;
 import com.nextbook.requests.BookRequestDTO;
 import com.nextbook.responses.BookResponseDTO;
 
@@ -17,7 +16,7 @@ public class BookService {
 
 	private final BookRepository bookRepository;
 
-	public BookService(BookRepository bookRepository, ProductRepository productRepository) {
+	public BookService(BookRepository bookRepository) {
 		this.bookRepository = bookRepository;
 	}
 
