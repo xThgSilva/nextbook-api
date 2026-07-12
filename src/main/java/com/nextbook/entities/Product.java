@@ -62,28 +62,34 @@ public class Product {
 	public Long getId() {
 		return id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public BigDecimal getPrice() {
 		return price;
 	}
-
 	public int getQuantity() {
 		return quantity;
 	}
-
 	public String getImageUrl() {
 		return imageUrl;
 	}
-
 	public Book getBook() {
 		return book;
 	}
-
 	public String getDescription() {
 		return description;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

@@ -54,28 +54,25 @@ public class Book {
 	public Long getId() {
 		return id;
 	}
-
 	public Product getProduct() {
 		return product;
 	}
-
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
 	public String getAuthor() {
 		return author;
 	}
-
 	public LocalDate getPublicationDate() {
 		return publicationDate;
 	}
-
 	public Category getCategory() {
 		return category;
 	}
-
 	public Availability getAvailability() {
 		return availability;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 }
