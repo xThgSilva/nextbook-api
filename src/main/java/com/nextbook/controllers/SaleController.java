@@ -1,6 +1,7 @@
 package com.nextbook.controllers;
 
 import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.nextbook.requests.SaleRequestDTO;
 import com.nextbook.responses.SaleAllSalesResponseDTO;
 import com.nextbook.responses.SaleCreatedResponseDTO;
 import com.nextbook.services.SaleService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/sales")
@@ -26,7 +30,7 @@ public class SaleController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<SaleCreatedResponseDTO> registerSale(@RequestBody SaleRequestDTO dto) {
+	public ResponseEntity<SaleCreatedResponseDTO> registerSale(@Valid @RequestBody SaleRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(saleService.registerSale(dto));
 	}
 	

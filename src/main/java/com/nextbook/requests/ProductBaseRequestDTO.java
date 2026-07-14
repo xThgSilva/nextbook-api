@@ -10,7 +10,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public abstract class ProductBaseRequestDTO {
-	
 	@NotBlank(message = "Name is required.")
     @Size(max = 100, message = "Name must be at most 100 characters.")
     private String name;
