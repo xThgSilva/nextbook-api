@@ -1,5 +1,6 @@
 package com.nextbook.services;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.data.domain.Page;
@@ -33,15 +34,16 @@ public class LoanService {
 	}
 
 	public LoanCreatedResponseDTO createLoan(LoanRequestDTO dto) {
-		Loan loan = new Loan(dto);
+		Loan loan = new Loan();
 		
 		User userLoan = userRepository.findById(dto.getUserId())
-				.orElseThrow(() -> new RuntimeException("User with Id " + dto.getUserId() + "not found."));
+				.orElseThrow(() -> new RuntimeException("User with Id " + dto.getUserId() + " not found."));
 		
 		Book bookLoan = bookRepository.findById(dto.getBookId())
 				.orElseThrow(() -> new RuntimeException("Book with Id " + dto.getBookId() + " not found."));
 		
 		loan.setLoanDate(LocalDateTime.now());
+		loan.setExpectedReturnDate(LocalDate.now().plusDays(14));
 		loan.setReturnStatus(ReturnStatus.IN_PROGRESS);
 		loan.setUser(userLoan);
 		loan.setBook(bookLoan);

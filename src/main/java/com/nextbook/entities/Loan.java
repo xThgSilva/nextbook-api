@@ -2,9 +2,6 @@ package com.nextbook.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import com.nextbook.requests.LoanRequestDTO;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -45,11 +42,6 @@ public class Loan {
 	private ReturnStatus returnStatus;
 	
 	public Loan() {  }
-	
-	public Loan(LoanRequestDTO dto) {
-		this.expectedReturnDate = dto.getExpectedReturnDate();
-		this.returnDate = dto.getReturnDate();
-	}
 
 	public Long getId() {
 		return id;
@@ -57,14 +49,26 @@ public class Loan {
 	public User getUser() {
 		return user;
 	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public Book getBook() {
 		return book;
+	}
+	public void setBook(Book book) {
+		this.book = book;
 	}
 	public LocalDateTime getLoanDate() {
 		return loanDate;
 	}
+	public void setLoanDate(LocalDateTime loanDate) {
+		this.loanDate = loanDate;
+	}
 	public LocalDate getExpectedReturnDate() {
 		return expectedReturnDate;
+	}
+	public void setExpectedReturnDate(LocalDate expectedReturnDate) {
+		this.expectedReturnDate = expectedReturnDate;
 	}
 	public LocalDate getReturnDate() {
 		return returnDate;
@@ -72,16 +76,8 @@ public class Loan {
 	public ReturnStatus getReturnStatus() {
 		return returnStatus;
 	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public void setBook(Book book) {
-		this.book = book;
-	}
-	public void setLoanDate(LocalDateTime loanDate) {
-		this.loanDate = loanDate;
-	}
 	public void setReturnStatus(ReturnStatus returnStatus) {
 		this.returnStatus = returnStatus;
 	}
+	
 }

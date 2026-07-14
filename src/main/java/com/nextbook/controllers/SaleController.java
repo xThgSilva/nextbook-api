@@ -34,14 +34,14 @@ public class SaleController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(saleService.registerSale(dto));
 	}
 	
-	@GetMapping(value = "/{page}/{size}")
+	@GetMapping
 	public ResponseEntity<Page<SaleAllSalesResponseDTO>> findAllSales(
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
 		return ResponseEntity.ok(saleService.findAllSales(page, size));
 	}
 	
-	@GetMapping(value = "/filter/{start}/{end}/{page}/{size}")
+	@GetMapping(value = "/filter")
 	public ResponseEntity<Page<SaleAllSalesResponseDTO>> filterSalesBetweenDate(
 	        @RequestParam LocalDate start,
 	        @RequestParam LocalDate end,

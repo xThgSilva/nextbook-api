@@ -1,19 +1,14 @@
 package com.nextbook.requests;
 
-import java.time.LocalDate;
+import jakarta.validation.constraints.NotNull;
 
 public class LoanRequestDTO {
-	private Long userId;
-	private Long bookId;
-	private LocalDate expectedReturnDate;
-	private LocalDate returnDate;
-	
-	public LocalDate getExpectedReturnDate() {
-		return expectedReturnDate;
-	}
-	public LocalDate getReturnDate() {
-		return returnDate;
-	}
+	@NotNull(message = "User is required.")
+    private Long userId;
+
+    @NotNull(message = "Book is required.")
+    private Long bookId;
+
 	public Long getUserId() {
 		return userId;
 	}

@@ -31,7 +31,7 @@ public class BookController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(bookService.registerBook(dto));
 	}
 	
-	@GetMapping(value = "/{page}/{size}")
+	@GetMapping
 	public ResponseEntity<Page<BookResponseDTO>> findAllBooks(
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {

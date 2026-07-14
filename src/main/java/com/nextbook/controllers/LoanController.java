@@ -37,7 +37,7 @@ public class LoanController {
 		return ResponseEntity.ok(loanService.findLoanById(id));
 	}
 	
-	@GetMapping(value = "/{page}/{size}")
+	@GetMapping
 	public ResponseEntity<Page<LoanAllLoansResponseDTO>> findAllLoans(
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
