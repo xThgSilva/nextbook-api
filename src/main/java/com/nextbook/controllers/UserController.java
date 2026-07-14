@@ -19,6 +19,8 @@ import com.nextbook.responses.UserCreatedResponseDTO;
 import com.nextbook.responses.UserDetailsResponseDTO;
 import com.nextbook.services.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -30,7 +32,7 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserCreatedResponseDTO> registerUser(@RequestBody UserRequestDTO dto) {
+	public ResponseEntity<UserCreatedResponseDTO> registerUser(@Valid @RequestBody UserRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(dto));
 	}
 	

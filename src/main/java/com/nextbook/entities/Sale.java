@@ -3,7 +3,6 @@ package com.nextbook.entities;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import com.nextbook.requests.SaleItemRequestDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
