@@ -42,11 +42,18 @@ public class LoanService {
 		Book bookLoan = bookRepository.findById(dto.getBookId())
 				.orElseThrow(() -> new RuntimeException("Book with Id " + dto.getBookId() + " not found."));
 		
+		if (bookLoan.getProduct().getQuantity() < 1) {
+			throw new RuntimeException("Book unvailable.");
+		}
+		
 		loan.setLoanDate(LocalDateTime.now());
 		loan.setExpectedReturnDate(LocalDate.now().plusDays(14));
 		loan.setReturnStatus(ReturnStatus.IN_PROGRESS);
 		loan.setUser(userLoan);
 		loan.setBook(bookLoan);
+		loan.getBook().getProduct().setQuantity(
+				loan.getBook().getProduct().getQuantity() - 1
+				);
 		
 		loanRepository.save(loan);
 		
@@ -65,5 +72,39 @@ public class LoanService {
 		Page<Loan> loans = loanRepository.findAll(pageable);
 		
 		return loans.map(LoanAllLoansResponseDTO::new);
+	}
+	
+	public LoanDetailsResponseDTO requestBookReturn(Long id) {
+		Loan loan = loanRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Loan with Id " + id + " not found."));
+		
+		if (loan.getReturnStatus() != ReturnStatus.IN_PROGRESS) {
+			throw new RuntimeException("This loan is not in progress.");
+		}
+		
+		loan.setReturnStatus(ReturnStatus.RETURN_REQUESTED);
+		loanRepository.save(loan);
+		
+		return new LoanDetailsResponseDTO(loan);
+	}
+	
+	public LoanDetailsResponseDTO updateLoanStatus(Long id) {
+		Loan loan = loanRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Loan with Id " + id + " not found."));
+		
+		if(loan.getReturnStatus() != ReturnStatus.RETURN_REQUESTED) {
+			throw new RuntimeException("This loan has no pending return request.");
+		}
+		
+		loan.setReturnDate(LocalDate.now());
+		loan.setReturnStatus(ReturnStatus.RETURNED);
+		loan.getBook().getProduct()
+		.setQuantity(
+				loan.getBook().getProduct().getQuantity() + 1
+				);
+		
+		loanRepository.save(loan);
+		
+		return new LoanDetailsResponseDTO(loan);
 	}
 }

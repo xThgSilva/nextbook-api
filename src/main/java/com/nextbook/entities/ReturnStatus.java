@@ -1,5 +1,5 @@
 package com.nextbook.entities;
 
 public enum ReturnStatus {
-	IN_PROGRESS, RETURNED, LATER
+	IN_PROGRESS, RETURN_REQUESTED, RETURNED
 }

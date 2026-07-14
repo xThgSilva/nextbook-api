@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,5 +43,15 @@ public class LoanController {
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
 		return ResponseEntity.ok(loanService.findAllLoans(page, size));
+	}
+	
+	@PatchMapping(value = "/request/{id}")
+	public ResponseEntity<LoanDetailsResponseDTO> requestBookReturn(@PathVariable Long id) {
+		return ResponseEntity.ok(loanService.requestBookReturn(id));
+	}
+	
+	@PatchMapping(value = "/confirm/{id}")
+	public ResponseEntity<LoanDetailsResponseDTO> updateLoanStatus(@PathVariable Long id) {
+		return ResponseEntity.ok(loanService.updateLoanStatus(id));
 	}
 }
