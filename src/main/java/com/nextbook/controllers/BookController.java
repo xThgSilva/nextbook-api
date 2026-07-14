@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.nextbook.requests.BookRequestDTO;
 import com.nextbook.responses.BookResponseDTO;
 import com.nextbook.services.BookService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/books")
@@ -24,7 +27,7 @@ public class BookController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<BookResponseDTO> registerBook(@RequestBody BookRequestDTO dto) {
+	public ResponseEntity<BookResponseDTO> registerBook(@Valid @RequestBody BookRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(bookService.registerBook(dto));
 	}
 	

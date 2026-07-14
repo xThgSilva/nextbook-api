@@ -21,6 +21,8 @@ import com.nextbook.responses.ProductCreatedResponseDTO;
 import com.nextbook.responses.ProductDetailsResponseDTO;
 import com.nextbook.services.ProductService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -32,7 +34,7 @@ public class ProductController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ProductCreatedResponseDTO> registerProduct(@RequestBody ProductRequestDTO dto) {
+	public ResponseEntity<ProductCreatedResponseDTO> registerProduct(@Valid @RequestBody ProductRequestDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(productService.registerProduct(dto));
 	}
 	

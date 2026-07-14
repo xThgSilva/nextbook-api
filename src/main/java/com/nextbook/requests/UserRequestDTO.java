@@ -9,14 +9,16 @@ import jakarta.validation.constraints.Size;
 public class UserRequestDTO {
 	
 	@NotBlank(message = "Name is required.")
+	@Size(max = 100, message = "Name must be at most 100 characters.")
 	private String name;
 	
 	@NotBlank(message = "E-mail is required")
-	@Email
+	@Email(message = "Invalid e-mail format")
+	@Size(max = 50, message = "E-mail must be at most 50 characters.")
 	private String email;
 	
 	@NotBlank(message = "Password is required")
-	@Size(min = 5, message = "Password must be at least 5 characters.")
+	@Size(min = 5, max = 255, message = "Password must be between 5 and 255 characters.")
 	private String password;
 	
 	@NotBlank(message = "Confirm password is required.")
