@@ -9,6 +9,8 @@ import com.nextbook.entities.Loan;
 import com.nextbook.entities.Role;
 import com.nextbook.entities.Sale;
 import com.nextbook.entities.User;
+import com.nextbook.exceptions.EmailAlreadyRegisteredException;
+import com.nextbook.exceptions.NotFoundException;
 import com.nextbook.repositories.LoanRepository;
 import com.nextbook.repositories.SaleRepository;
 import com.nextbook.repositories.UserRepository;
@@ -37,7 +39,7 @@ public class UserService {
 		Optional<User> emailExists = userRepository.findByEmail(dto.getEmail());
 		
 		if (emailExists.isPresent())
-			throw new RuntimeException("E-mail already registered.");
+			throw new EmailAlreadyRegisteredException("E-mail already registered.");
 		
 		if (!dto.getPassword().equals(dto.getConfirmPassword()))
 			throw new RuntimeException("The password confirmation must match the password.");
@@ -51,7 +53,7 @@ public class UserService {
 	
 	public UserDetailsResponseDTO findUserById(Long id) {
 		User user = userRepository.findById(id)
-			.orElseThrow(() -> new RuntimeException("User with Id " + id + " not found."));
+			.orElseThrow(() -> new NotFoundException("User with Id " + id + " not found."));
 
 		return new UserDetailsResponseDTO(user);
 	}
@@ -63,7 +65,7 @@ public class UserService {
 	
 	public List<SaleAllSalesResponseDTO> findAllUserSales(Long id) {
 		userRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("User with Id " + id + " not found."));
+				.orElseThrow(() -> new NotFoundException("User with Id " + id + " not found."));
 		
 		List<Sale> sales = saleRepository.findByUserId(id);
 		return sales.stream().map(SaleAllSalesResponseDTO::new).toList();
@@ -71,7 +73,7 @@ public class UserService {
 	
 	public List<LoanAllLoansResponseDTO> findAllUserLoans(Long id) {
 		userRepository.findById(id)
-			.orElseThrow(() -> new RuntimeException("User with Id " + id + " not found."));
+			.orElseThrow(() -> new NotFoundException("User with Id " + id + " not found."));
 		
 		List<Loan> loans = loanRepository.findByUserId(id);
 		return loans.stream().map(LoanAllLoansResponseDTO::new).toList();
