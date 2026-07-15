@@ -11,6 +11,7 @@ import com.nextbook.entities.Sale;
 import com.nextbook.entities.User;
 import com.nextbook.exceptions.EmailAlreadyRegisteredException;
 import com.nextbook.exceptions.NotFoundException;
+import com.nextbook.exceptions.PasswordConflictException;
 import com.nextbook.repositories.LoanRepository;
 import com.nextbook.repositories.SaleRepository;
 import com.nextbook.repositories.UserRepository;
@@ -42,7 +43,7 @@ public class UserService {
 			throw new EmailAlreadyRegisteredException("E-mail already registered.");
 		
 		if (!dto.getPassword().equals(dto.getConfirmPassword()))
-			throw new RuntimeException("The password confirmation must match the password.");
+			throw new PasswordConflictException("The password confirmation must match the password.");
 
 			User user = new User(dto);
 			user.setRole(Role.USER);

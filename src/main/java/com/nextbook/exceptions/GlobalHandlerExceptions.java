@@ -45,5 +45,25 @@ public class GlobalHandlerExceptions {
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
 	
-
+	@ExceptionHandler(PasswordConflictException.class)
+	public ResponseEntity<ErrorResponse> handlePasswordConflict(PasswordConflictException ex, HttpServletResponse servlet) {
+		ErrorResponse error = new ErrorResponse(
+				HttpStatus.BAD_REQUEST.value(),
+				"Bad Request.",
+				ex.getMessage()
+				);
+		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(InvalidStatusBookException.class)
+	public ResponseEntity<ErrorResponse> handleInvalidStausBook(InvalidStatusBookException ex, HttpServletResponse servlet) {
+		ErrorResponse error = new ErrorResponse(
+				HttpStatus.BAD_REQUEST.value(),
+				"Bad Request.",
+				ex.getMessage()
+				);
+		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+	}
 }

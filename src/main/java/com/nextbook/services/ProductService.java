@@ -1,13 +1,12 @@
 package com.nextbook.services;
 
-import java.math.BigDecimal;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.nextbook.entities.Product;
+import com.nextbook.exceptions.NotFoundException;
 import com.nextbook.repositories.ProductRepository;
 import com.nextbook.requests.ProductRequestDTO;
 import com.nextbook.requests.ProductUpdateRequestDTO;
@@ -25,20 +24,15 @@ public class ProductService {
 	}
 	
 	public ProductCreatedResponseDTO registerProduct(ProductRequestDTO dto) {
-		if (dto.getPrice().compareTo(BigDecimal.ZERO) > 0 && dto.getQuantity() > 0 && dto.getName() != "") {
 			Product product = new Product(dto);
 			productRepository.save(product);	
 			
 			return new ProductCreatedResponseDTO(product);
-		}
-		else {
-			throw new RuntimeException("Invalid data to create product.");
-		}
 	}
 	
 	public ProductDetailsResponseDTO findProductById(Long id) {
 		Product product = productRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Product with Id " + id + " not found."));
+				.orElseThrow(() -> new NotFoundException("Product with Id " + id + " not found."));
 	
 		return new ProductDetailsResponseDTO(product);
 	}
@@ -52,7 +46,7 @@ public class ProductService {
 	
 	public ProductDetailsResponseDTO updateProductById(Long id, ProductUpdateRequestDTO dto) {
 		Product product = productRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Product with Id " + id + " not found."));
+				.orElseThrow(() -> new NotFoundException("Product with Id " + id + " not found."));
 		
 		product.setName(dto.getName());
 		product.setQuantity(dto.getQuantity());
@@ -69,7 +63,7 @@ public class ProductService {
 	
 	public void deleteProduct(Long id) {
 		productRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Product with Id " + id + " not found."));
+				.orElseThrow(() -> new NotFoundException("Product with Id " + id + " not found."));
 		
 		productRepository.deleteById(id);
 	}

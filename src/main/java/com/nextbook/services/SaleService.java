@@ -16,6 +16,7 @@ import com.nextbook.entities.Product;
 import com.nextbook.entities.Sale;
 import com.nextbook.entities.SaleItem;
 import com.nextbook.entities.User;
+import com.nextbook.exceptions.NotFoundException;
 import com.nextbook.repositories.ProductRepository;
 import com.nextbook.repositories.SaleRepository;
 import com.nextbook.repositories.UserRepository;
@@ -43,7 +44,7 @@ public class SaleService {
 	@Transactional
 	public SaleCreatedResponseDTO registerSale(SaleRequestDTO dto) {
 		User user = userRepository.findById(dto.getUserId())
-				.orElseThrow(() -> new RuntimeException("User with Id " + dto.getUserId() + " not found."));
+				.orElseThrow(() -> new NotFoundException("User with Id " + dto.getUserId() + " not found."));
 		
 		Sale sale = new Sale();
 		sale.setUser(user);
@@ -53,7 +54,7 @@ public class SaleService {
 		
 		for (SaleItemRequestDTO item : dto.getSaleItems()) {
 			Product product = productRepository.findById(item.getProductId())
-					.orElseThrow(() -> new RuntimeException("Product with Id " + item.getProductId() + " not found."));
+					.orElseThrow(() -> new NotFoundException("Product with Id " + item.getProductId() + " not found."));
 			
 			SaleItem saleItem = new SaleItem();
 			saleItem.setSale(sale);

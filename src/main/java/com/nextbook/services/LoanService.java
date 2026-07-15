@@ -12,6 +12,8 @@ import com.nextbook.entities.Book;
 import com.nextbook.entities.Loan;
 import com.nextbook.entities.ReturnStatus;
 import com.nextbook.entities.User;
+import com.nextbook.exceptions.InvalidStatusBookException;
+import com.nextbook.exceptions.NotFoundException;
 import com.nextbook.repositories.BookRepository;
 import com.nextbook.repositories.LoanRepository;
 import com.nextbook.repositories.UserRepository;
@@ -37,10 +39,10 @@ public class LoanService {
 		Loan loan = new Loan();
 		
 		User userLoan = userRepository.findById(dto.getUserId())
-				.orElseThrow(() -> new RuntimeException("User with Id " + dto.getUserId() + " not found."));
+				.orElseThrow(() -> new NotFoundException("User with Id " + dto.getUserId() + " not found."));
 		
 		Book bookLoan = bookRepository.findById(dto.getBookId())
-				.orElseThrow(() -> new RuntimeException("Book with Id " + dto.getBookId() + " not found."));
+				.orElseThrow(() -> new NotFoundException("Book with Id " + dto.getBookId() + " not found."));
 		
 		if (bookLoan.getProduct().getQuantity() < 1) {
 			throw new RuntimeException("Book unvailable.");
@@ -62,7 +64,7 @@ public class LoanService {
 	
 	public LoanDetailsResponseDTO findLoanById(Long id) {
 		Loan loan = loanRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Loan with Id " + id + " not found."));
+				.orElseThrow(() -> new NotFoundException("Loan with Id " + id + " not found."));
 		
 		return new LoanDetailsResponseDTO(loan);
 	}
@@ -76,10 +78,10 @@ public class LoanService {
 	
 	public LoanDetailsResponseDTO requestBookReturn(Long id) {
 		Loan loan = loanRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Loan with Id " + id + " not found."));
+				.orElseThrow(() -> new NotFoundException("Loan with Id " + id + " not found."));
 		
 		if (loan.getReturnStatus() != ReturnStatus.IN_PROGRESS) {
-			throw new RuntimeException("This loan is not in progress.");
+			throw new InvalidStatusBookException("This loan is not in progress.");
 		}
 		
 		loan.setReturnStatus(ReturnStatus.RETURN_REQUESTED);
@@ -90,10 +92,10 @@ public class LoanService {
 	
 	public LoanDetailsResponseDTO updateLoanStatus(Long id) {
 		Loan loan = loanRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Loan with Id " + id + " not found."));
+				.orElseThrow(() -> new NotFoundException("Loan with Id " + id + " not found."));
 		
 		if(loan.getReturnStatus() != ReturnStatus.RETURN_REQUESTED) {
-			throw new RuntimeException("This loan has no pending return request.");
+			throw new InvalidStatusBookException("This loan has no pending return request.");
 		}
 		
 		loan.setReturnDate(LocalDate.now());
