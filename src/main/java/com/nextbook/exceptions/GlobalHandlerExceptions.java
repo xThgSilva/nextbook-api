@@ -66,4 +66,15 @@ public class GlobalHandlerExceptions {
 		
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(InvalidQuantityException.class)
+	public ResponseEntity<ErrorResponse> handleInvalidQuantity(InvalidQuantityException ex, HttpServletResponse servlet) {
+		ErrorResponse error = new ErrorResponse(
+				HttpStatus.BAD_REQUEST.value(),
+				"Bad Request.",
+				ex.getMessage()
+				);
+		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+	}
 }

@@ -12,6 +12,7 @@ import com.nextbook.entities.Book;
 import com.nextbook.entities.Loan;
 import com.nextbook.entities.ReturnStatus;
 import com.nextbook.entities.User;
+import com.nextbook.exceptions.InvalidQuantityException;
 import com.nextbook.exceptions.InvalidStatusBookException;
 import com.nextbook.exceptions.NotFoundException;
 import com.nextbook.repositories.BookRepository;
@@ -45,7 +46,7 @@ public class LoanService {
 				.orElseThrow(() -> new NotFoundException("Book with Id " + dto.getBookId() + " not found."));
 		
 		if (bookLoan.getProduct().getQuantity() < 1) {
-			throw new RuntimeException("Book unvailable.");
+			throw new InvalidQuantityException("Book unvailable.");
 		}
 		
 		loan.setLoanDate(LocalDateTime.now());
