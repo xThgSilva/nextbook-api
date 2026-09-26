@@ -13,17 +13,4 @@ public class NextbookApiApplication {
 		SpringApplication.run(NextbookApiApplication.class, args);
 	}
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/products/**")
-                        .allowedOrigins("http://localhost:5173")
-                        .allowedMethods("*")
-                        .allowedHeaders("*");
-            }
-        };
-
-    }
 }
