@@ -1,5 +1,7 @@
 package com.nextbook.controllers;
 
+import com.nextbook.entities.Availability;
+import com.nextbook.entities.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.nextbook.requests.ProductRequestDTO;
 import com.nextbook.requests.ProductUpdateRequestDTO;
 import com.nextbook.responses.ProductAllProductsDTO;
 import com.nextbook.responses.ProductCreatedResponseDTO;
 import com.nextbook.responses.ProductDetailsResponseDTO;
 import com.nextbook.services.ProductService;
-
 import jakarta.validation.Valid;
+
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/products")
@@ -44,11 +46,18 @@ public class ProductController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Page<ProductAllProductsDTO>> findAllProducts(
-			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
-		return ResponseEntity.ok(productService.findAllProducts(page, size));
-	}
+    public ResponseEntity<Page<ProductAllProductsDTO>> findAllProducts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false, defaultValue = "") String searchName,
+            @RequestParam(required = false) Category[] categories,
+            @RequestParam(required = false) Availability availability,
+            @RequestParam(required = false, defaultValue = "false") Boolean isBook
+    ) {
+        return ResponseEntity.ok(productService.findAllProducts(
+                page, size, searchName, categories, availability, isBook
+        ));
+    }
 	
 	@DeleteMapping(value = "/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)

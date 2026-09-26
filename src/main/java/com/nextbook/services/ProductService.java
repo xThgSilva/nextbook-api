@@ -1,5 +1,7 @@
 package com.nextbook.services;
 
+import com.nextbook.entities.Availability;
+import com.nextbook.entities.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,13 +38,19 @@ public class ProductService {
 	
 		return new ProductDetailsResponseDTO(product);
 	}
-	
-	public Page<ProductAllProductsDTO> findAllProducts(int page, int size) {
-		Pageable pageable = PageRequest.of(page, size);
-		Page<Product> products = productRepository.findAll(pageable);
-		
-		return products.map(ProductAllProductsDTO::new);
-	}
+
+    public Page<ProductAllProductsDTO> findAllProducts(
+            int page, int size,
+            String searchName,
+            Category[] categories,
+            Availability availability,
+            Boolean isBook
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return productRepository.findByFilters(
+                searchName, isBook, categories, availability, pageable
+        ).map(ProductAllProductsDTO::new);
+    }
 	
 	public ProductDetailsResponseDTO updateProductById(Long id, ProductUpdateRequestDTO dto) {
 		Product product = productRepository.findById(id)
